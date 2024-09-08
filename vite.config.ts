@@ -27,9 +27,11 @@ export const defaultConfig: UserConfig  = {
 
 export default defineConfig(({mode}) => {
 	const envPort = Number(loadEnv(mode, process.cwd()).VITE_PORT);
+	const base = mode === 'production' ? '/poke/' : '/';  // 경로 설정
 
 	return ({
 		...defaultConfig,
+		base,  // 여기서 경로 설정
 		esbuild: {
 			pure: mode === 'production' ? ['console.log'] : [],
 			keepNames: true,
